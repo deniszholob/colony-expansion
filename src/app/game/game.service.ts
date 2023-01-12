@@ -42,9 +42,9 @@ export class GameService {
       player.stats.resourceCount = {
         food: 5,
         gold: 5,
-        stone: 10,
+        stone: 15,
         wood: 5,
-        influence: 20,
+        actions: 5,
       };
     });
   }

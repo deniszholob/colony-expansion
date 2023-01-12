@@ -72,6 +72,7 @@ export class AppComponent {
    */
   public playerStats: PlayerStats;
   public structureData = structureData;
+  public actionsTaken: number = 0;
 
   constructor(public gameService: GameService) {
     // this.sbx();
@@ -152,6 +153,7 @@ export class AppComponent {
     hex.data.owner = player.id;
     hex.data.ownerColor = player.color;
     player.buildTile(hex);
+    this.actionsTaken++;
     this.refreshStats();
     if (action == Actions.BuildMonument && hex.data.structure === "monument") {
       const playAgain = this.gameService.end(player);
@@ -166,9 +168,11 @@ export class AppComponent {
   }
 
   public onNewGame() {
+    this.gameService.gameRound = 0;
     this.generateMap();
     this.resetPlayers();
     this.assignPlayerStartPositions();
+    this.refreshStats();
   }
 
   private resetPlayers() {
@@ -320,6 +324,8 @@ export class AppComponent {
     this.action = action;
     this.clearHexHighlight(this.interactableTiles);
     if (action === Actions.EndTurn) {
+      this.currentPlayer.updateActionCount();
+      this.actionsTaken = 0;
       this.currentPlayer = this.gameService.setNextPLayerTurn();
       this.refreshStats();
     } else {
@@ -362,6 +368,9 @@ export class AppComponent {
   }
 
   public canBuildStructure(structure: StructureType): boolean {
+    if (this.actionsTaken >= this.currentPlayer.maxActions) {
+      return false;
+    }
     if (
       (structure === STRUCTURE_TYPES.capitol &&
         this.currentPlayer.stats.structureCount.capitol >= 1) ||

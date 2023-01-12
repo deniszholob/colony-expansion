@@ -15,7 +15,7 @@ import { StatEntity } from "../stats-group/stats-group.component";
 export class StatsBarComponent {
   @Input()
   public set playerStats(s: PlayerStats) {
-    this.statsForResources = ResourceTypes.map(
+    this.statsForResources = ResourceTypes.filter((r) => r !== "actions").map(
       (t: ResourceType): StatEntity => ({
         statType: t,
         statCount: s.resourceCount[t],

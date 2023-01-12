@@ -3,7 +3,7 @@ export const RESOURCE_TYPES = {
   wood: "wood",
   stone: "stone",
   gold: "gold",
-  influence: "influence",
+  actions: "actions",
 } as const;
 export type ResourceType = keyof typeof RESOURCE_TYPES;
 export const ResourceTypes: ResourceType[] = Object.keys(RESOURCE_TYPES).filter(
@@ -56,7 +56,7 @@ export const ICON_MAP: Record<ResourceType | StructureType | HexType, string> =
     stone: "rockGrey_small4",
     // wood: "logPile",
     wood: "treePine_large",
-    influence: "hourglass",
+    actions: "hourglass",
     // ===================== //
     capitol: "oldBuilding",
     city: "housing",
@@ -85,29 +85,29 @@ export const structureData: StructuresData = {
   road: {
     description: "Connects other structures, covers up resources",
     note: "Necessary for expansion",
-    buildingRequirement: { stone: 5, gold: 1, influence: 10 },
+    buildingRequirement: { stone: 5, gold: 1 },
     productionMultiplier: 0,
   },
   outpost: {
     description: "Produces resources from the non road tile its built on",
     note: "Cannot build next to other structure",
-    buildingRequirement: { food: 5, wood: 5, gold: 2, stone: 1, influence: 10 },
+    buildingRequirement: { food: 5, wood: 5, gold: 2, stone: 2 },
     productionMultiplier: 1,
-    bonusProduction: { gold: 1, influence: 1 },
+    bonusProduction: { gold: 1, actions: 1 },
   },
   city: {
     description: "Upgrade from Outpost",
     note: "Produces more resources",
-    buildingRequirement: { stone: 10, food: 50, wood: 30, gold: 10, influence: 20 },
+    buildingRequirement: { stone: 10, food: 50, wood: 30, gold: 10 },
     productionMultiplier: 2,
-    bonusProduction: { gold: 2, influence: 5 },
+    bonusProduction: { gold: 2, actions: 2 },
   },
   capitol: {
     description: "Upgrade from city",
     note: "Can build only 1",
-    buildingRequirement: { stone: 100, food: 100, wood: 100, gold: 100, influence: 30 },
+    buildingRequirement: { stone: 100, food: 100, wood: 100, gold: 100 },
     productionMultiplier: 4,
-    bonusProduction: { gold: 3, influence: 10 },
+    bonusProduction: { gold: 3, actions: 4 },
   },
   monument: {
     description: "Signifies your claim for this island",
@@ -116,10 +116,9 @@ export const structureData: StructuresData = {
       stone: 1000,
       wood: 500,
       gold: 500,
-      influence: 100,
     },
     productionMultiplier: 1,
-    bonusProduction: { influence: 20 },
+    bonusProduction: { actions: 5 },
   },
   dock: {
     description:
@@ -127,7 +126,7 @@ export const structureData: StructuresData = {
     note: "Cannot build next to other structure",
     buildingRequirement: { stone: 10, wood: 20, gold: 15 },
     productionMultiplier: 1,
-    bonusProduction: { gold: 1, stone: 1, food: 1, wood: 1, influence: 1 },
+    bonusProduction: { gold: 1, stone: 1, food: 1, wood: 1, actions: 1 },
   },
 } as const;
 

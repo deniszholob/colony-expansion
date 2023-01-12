@@ -28,6 +28,11 @@
               <span *ngIf="currentPlayer" [style.color]="currentPlayer.color">{{ currentPlayer.name }} </span>
             </p>
             <span>Round: {{ gameService.gameRound }}</span>
+            <p class="stats-entity">
+              <img src="assets/images/hourglass.png" alt="" />
+              <span>Actions:</span>
+              <span>{{ actionsTaken }}/{{ currentPlayer.maxActions }}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -35,6 +40,8 @@
       <div class="actions">
         <div class="w-full d-flex">
           <button (click)="onAction(Actions.EndTurn)" class="w-full">
+            <div class="progress" [style.width]="100 - (actionsTaken / currentPlayer.maxActions) * 100 + '%'"></div>
+            <span>{{ actionsTaken }}/{{ currentPlayer.maxActions }}</span>
             <img src="assets/images/hourglass.png" alt="" />
             End Turn
           </button>

@@ -31,14 +31,14 @@ export class Player implements InitPlayer {
       gold: 0,
       stone: 0,
       wood: 0,
-      influence: 0,
+      actions: 0,
     },
     resourceCount: {
       food: 0,
       gold: 0,
       stone: 0,
       wood: 0,
-      influence: 0,
+      actions: 0,
     },
     structureCount: {
       road: 0,
@@ -49,6 +49,7 @@ export class Player implements InitPlayer {
       monument: 0,
     },
   };
+  public maxActions = 2;
   private _ownedTiles: TileHex[] = [];
 
   // TODO
@@ -70,6 +71,19 @@ export class Player implements InitPlayer {
     this._ownedTiles.push(tile);
     this.stats.structureCount[tile.data.structure]++;
     this.updateProductionRates();
+  }
+
+  public updateActionCount(): void {
+    this.maxActions = this._ownedTiles
+      .map((t) => {
+        if (t.data.structure) {
+          const influence =
+            structureData[t.data.structure].bonusProduction?.actions;
+          return influence ?? 0;
+        }
+        return 0;
+      })
+      .reduce((acc, curr) => acc + curr, 0);
   }
 
   public buildTile(tile: TileHex) {
@@ -106,11 +120,9 @@ export class Player implements InitPlayer {
   }
 
   public updateProduction() {
-    console.table(this.stats.resourceCount);
     ResourceTypes.forEach((type: ResourceType) => {
       this.stats.resourceCount[type] += this.stats.resourceRate[type];
     });
-    console.table(this.stats.resourceCount);
   }
 
   private updateProductionRateFromTile(

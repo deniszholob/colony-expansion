@@ -17,3 +17,9 @@
 
 * Win Condition
 * Upgradable structures
+
+* clearing highlighted structure tiles should keep player color
+* add trading
+* add 1 action globally for each type of structure
+* victory points for structure types?
+* 
