@@ -1,0 +1,11 @@
+<div class="stats-entity" [title]="type | titlecase">
+  <img src="assets/images/{{statIcon}}.png" alt="">
+  <div class="data">
+    <span *ngIf="statCount!= null" class="count" title="Amount">{{statCount}}</span>
+    <span *ngIf="statRate != null" class="rate gray" [ngClass]="{'green': statRate > 0, 'red':statRate < 0}" title="Production">
+      <span *ngIf="statRate >= 0">+</span>
+      <span *ngIf="statRate < 0">-</span>
+      <span>{{statRate}}</span>
+    </span>
+  </div>
+</div>

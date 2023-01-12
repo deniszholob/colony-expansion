@@ -1,0 +1,83 @@
+{
+  "explorer.autoRevealExclude": {
+    "**/node_modules": true
+  },
+  "files.exclude": {
+    ".angular": false,
+    ".firebase": false,
+    ".github": false,
+    ".husky": false,
+    "build": false,
+    "docs": false,
+    "node_modules": false,
+    "public/": false,
+    "screenshots/": false,
+    ".editorconfig": false,
+    ".eslint*": false,
+    ".firebaserc": false,
+    ".gitignore": false,
+    ".npmrc": false,
+    ".prettierignore": false,
+    ".prettierrc": false,
+    "documentation.json": false,
+    "firebase.json": false,
+    "debug.log": false,
+    "package-lock.json": false,
+    "**/tsconfig*": false,
+    "**/tslint.json": false,
+    "FUNDING.yml": false,
+    "LICENSE": false,
+    "**/.browserslistrc": false,
+    "**/.gitkeep": false,
+    "**/environments": false,
+    "**/src/main.ts": false,
+    "**/polyfills.ts": false,
+    "**/typings.d.ts": false,
+    "jest.config.js": false,
+    "setup-jest.ts": false,
+    "jest.setup.ts": false,
+    "CNAME": false,
+    "coverage": false,
+    "src/*.{png,xml,ico,webmanifest,json,svg,txt}": false,
+    "src/CNAME": false
+  },
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [80, 140],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "explorer.sortOrderLexicographicOptions": "lower", // Case sensitive file ordering in tree
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.activeIconPack": "angular_ngrx",
+  "material-icon-theme.folders.associations": {
+    "workflows": "github",
+    "cheat-sheets": "content",
+    "models": "mjml"
+  },
+  "material-icon-theme.files.associations": {
+    "*.data.ts": "database",
+    "*.model.ts": "mjml",
+    "model.ts": "mjml",
+    "index.ts": "url"
+  },
+  "cSpell.words": ["deniszholob", "interactable"],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
+}

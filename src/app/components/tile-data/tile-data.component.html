@@ -1,0 +1,10 @@
+<div class="stats-entity flex-col">
+  <h4>
+    <img src="assets/images/{{structureIcon}}.png" alt="">{{type | titlecase}}
+  </h4>
+
+  <div *ngIf="tileProductionStats.length > 0" class="structure-section">
+    <span class="text-muted">Resources </span>
+    <div class="p-l-5"><app-stats-group [stats]="tileProductionStats"></app-stats-group></div>
+  </div>
+</div>

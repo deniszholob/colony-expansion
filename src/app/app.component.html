@@ -1,0 +1,76 @@
+<div class="layout">
+  <!-- <header class="header max-content-width"> -->
+  <!-- <h1>Colony Expansion</h1> -->
+  <!-- </header> -->
+
+  <main class="main">
+    <div class="game-board">
+      <div>
+        <div class="d-flex flex-center justify-around">
+          <button (click)="onNewGame()">New Game</button>
+          <app-stats-bar [playerStats]="playerStats" class="p-l-5"></app-stats-bar>
+        </div>
+        <br />
+
+        <app-hex-grid [grid]="hexGrid" [debug]="debug"></app-hex-grid>
+
+        <div class="d-flex">
+          <div class="tile-stats styled-box flex-auto">
+            <app-tile-data [type]="'water'"></app-tile-data>
+            <app-tile-data [type]="'grass'"></app-tile-data>
+            <app-tile-data [type]="'forest'"></app-tile-data>
+            <app-tile-data [type]="'mountains'"></app-tile-data>
+          </div>
+
+          <div class="styled-box">
+            <p>
+              <span>Current Player: </span>
+              <span *ngIf="currentPlayer" [style.color]="currentPlayer.color">{{ currentPlayer.name }} </span>
+            </p>
+            <span>Round: {{ gameService.gameRound }}</span>
+          </div>
+        </div>
+      </div>
+      <!-- <app-hex-tile [hexTile]="hexTile" ></app-hex-tile> -->
+      <div class="actions">
+        <div class="w-full d-flex">
+          <button (click)="onAction(Actions.EndTurn)" class="w-full">
+            <img src="assets/images/hourglass.png" alt="" />
+            End Turn
+          </button>
+          <button (click)="onCancelAction()" class="w-full" [disabled]="!action">
+            <img src="assets/images/cross.png" alt="" />
+            Cancel
+          </button>
+        </div>
+
+        <button (click)="onAction(Actions.BuildRoad)" [disabled]="!canBuildStructure('road')">
+          <app-structure-data [type]="'road'" class="d-contents"></app-structure-data>
+        </button>
+        <button (click)="onAction(Actions.BuildOutpost)" [disabled]="!canBuildStructure('outpost')">
+          <app-structure-data [type]="'outpost'" class="d-contents"></app-structure-data>
+        </button>
+        <button (click)="onAction(Actions.BuildCity)" [disabled]="!canBuildStructure('city')">
+          <app-structure-data [type]="'city'" class="d-contents"></app-structure-data>
+        </button>
+        <button (click)="onAction(Actions.BuildCapitol)" [disabled]="!canBuildStructure('capitol')">
+          <app-structure-data [type]="'capitol'" class="d-contents"></app-structure-data>
+        </button>
+        <button (click)="onAction(Actions.BuildMonument)" [disabled]="!canBuildStructure('monument')">
+          <app-structure-data [type]="'monument'" class="d-contents"></app-structure-data>
+        </button>
+        <br />
+      </div>
+    </div>
+
+    <!-- <div class="game-debug">
+      <span>Current Player: </span>
+      <span *ngIf="currentPlayer" [style.color]="currentPlayer.color">{{currentPlayer.name}} </span>
+      <br>
+      <span>Stats:</span>
+      <pre *ngIf="currentPlayer">{{currentPlayer.stats | json}}</pre>
+    </div> -->
+  </main>
+
+  <app-footer class="w-full"></app-footer>
+</div>

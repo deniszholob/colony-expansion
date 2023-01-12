@@ -1,0 +1,30 @@
+<div class="structure-data">
+  <div>
+    <h3 class="stats-entity title">
+      <img src="assets/images/{{structureIcon}}.png" alt="{{type}}">
+      Build {{type | titlecase}}
+    </h3>
+
+    <p class="description p-l-5 text-muted structure-section">
+      {{structureDescription}} <br>
+      {{structureNote}}
+    </p>
+  </div>
+
+  <div>
+    <div *ngIf="structureRequirementStats.length > 0" class="structure-section">
+      <span>Build Cost</span>
+      <div class="p-l-5"><app-stats-group [stats]="structureRequirementStats"></app-stats-group></div>
+    </div>
+
+    <div *ngIf="structureProductionStats.length > 0" class="structure-section">
+      <span>Production <span class="text-muted">(In addition to tile production)</span></span>
+      <div class="p-l-5"><app-stats-group [stats]="structureProductionStats"></app-stats-group></div>
+    </div>
+
+    <p *ngIf="productionMultiplier > 0" class="structure-section">
+      {{productionMultiplier}}x Production multiplier
+    </p>
+  </div>
+
+</div>
