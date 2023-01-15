@@ -1,6 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { TileHex } from "../components/hex-tile/hex.model";
 import {
+  ColorsPlayer,
   hexTileProductionData,
   ProductionData,
   ResourceType,
@@ -12,10 +13,10 @@ import {
 
 export interface InitPlayer {
   name: string;
-  color: string;
+  color: ColorsPlayer;
 }
 
-type StatResources = Record<ResourceType, number>;
+export type StatResources = Record<ResourceType, number>;
 type StatStructures = Record<StructureType, number>;
 
 export type PlayerStats = {
@@ -61,7 +62,7 @@ export class Player implements InitPlayer {
     // return [...this._ownedTiles];
   }
 
-  constructor(public name: string, public color: string, public id: number) {}
+  constructor(public name: string, public color: ColorsPlayer, public id: number) {}
 
   public addTile(tile: TileHex): void {
     if (tile.data.structure == undefined) {
@@ -121,7 +122,12 @@ export class Player implements InitPlayer {
 
   public updateProduction() {
     ResourceTypes.forEach((type: ResourceType) => {
+      // if (type === "influence") {
+      //   this.stats.resourceCount[type] = this.stats.resourceRate[type];
+      //   this.stats.resourceRate[type] = 0;
+      // } else {
       this.stats.resourceCount[type] += this.stats.resourceRate[type];
+      // }
     });
   }
 

@@ -1,10 +1,10 @@
 import { defineHex, HexCoordinates } from "honeycomb-grid";
 import { Subject } from "rxjs";
-import { HexType, HEX_TYPES, StructureType } from "src/app/game/game.data";
+import { ColorsPlayer, ColorsSystem, COLORS_SYSTEM, HexType, HEX_TYPES, StructureType } from "src/app/game/game.data";
 
 export type HexData = {
   type: HexType;
-  ownerColor: string;
+  color: ColorsPlayer | ColorsSystem;
   /** -1 is environment */
   owner: number;
   yield: number;
@@ -18,7 +18,7 @@ interface HexCallBack {
 export class TileHex extends defineHex({ origin: "topLeft" }) {
   public data: HexData = {
     type: HEX_TYPES.water,
-    ownerColor: "grey",
+    color: COLORS_SYSTEM.grey,
     owner: -1,
     yield: 0,
   };

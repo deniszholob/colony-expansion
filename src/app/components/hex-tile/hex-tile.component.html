@@ -1,5 +1,5 @@
-<div class="tile" [class.tile-selected]="hexTile?.data?.ownerColor === 'white'"
-  [style.background-color]="hexTile?.data?.ownerColor" (click)="onClick(false)">
+<div class="tile" [class.tile-selected]="hexTile?.data?.color === 'white'"
+  [style.background-color]="hexTile?.data?.color" (click)="onClick(false)">
 
   <!-- <button class="tile-upgrade green" title="Upgrade" *ngIf="canUpgrade" (click)="onClick(true)">+</button> -->
 

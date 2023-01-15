@@ -1,6 +1,16 @@
 import { Injectable } from "@angular/core";
+import {
+  PLAYER_STARTING_RESOURCES_DEV,
+  PLAYER_STARTING_RESOURCES_NORMAL,
+} from "./game-configuration.data";
 import { StructureType, STRUCTURE_TYPES } from "./game.data";
 import { InitPlayer, Player } from "./player.model";
+
+export interface GameState {
+  players: Player[];
+  currentPlayerTurn: number;
+  gameRound: number;
+}
 
 export enum Actions {
   EndTurn,
@@ -23,7 +33,9 @@ export const structureBuildMap: Record<
 };
 
 @Injectable()
-export class GameService {
+export class GameService implements GameState {
+  public DEV_MODE: boolean = true;
+
   public gameRound: number = 0;
   public players: Player[] = [];
   public currentPlayerTurn: number = 0;
@@ -39,13 +51,9 @@ export class GameService {
 
   public giveStartingResources() {
     this.players.forEach((player) => {
-      player.stats.resourceCount = {
-        food: 5,
-        gold: 5,
-        stone: 15,
-        wood: 5,
-        actions: 5,
-      };
+      player.stats.resourceCount = this.DEV_MODE
+        ? PLAYER_STARTING_RESOURCES_DEV
+        : PLAYER_STARTING_RESOURCES_NORMAL;
     });
   }
 

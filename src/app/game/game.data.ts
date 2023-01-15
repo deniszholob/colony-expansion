@@ -46,7 +46,29 @@ export const TILE_PROBABILITY_TOTAL = tileProbabilities.reduce(
   0
 );
 
-export const OWNER_COLORS = ["grey"];
+export const COLORS_PLAYER = {
+  cyan: "cyan",
+  magenta: "magenta",
+  yellow: "yellow",
+  red: "red",
+  orange: "orange",
+  violet: "violet",
+} as const;
+
+export const COLORS_SYSTEM = {
+  grey: "grey",
+  white: "white",
+} as const;
+
+export type ColorsPlayer = keyof typeof COLORS_PLAYER;
+export type ColorsSystem = keyof typeof COLORS_SYSTEM;
+
+// function constToArray<T>(obj:){
+//   Object.keys(PLAYER_COLORS).filter(
+//     (v): v is T => v in PLAYER_COLORS
+//   );
+// }
+
 
 export const ICON_MAP: Record<ResourceType | StructureType | HexType, string> =
   {

@@ -9,6 +9,10 @@ import {
 } from "honeycomb-grid";
 import { TileHex } from "./components/hex-tile/hex.model";
 import {
+  AVAILABLE_START_POSITIONS_WATER,
+  GAME_PLAYERS,
+} from "./game/game-configuration.data";
+import {
   hexTypes,
   HEX_TYPES,
   structureData,
@@ -17,6 +21,7 @@ import {
   tileProbabilities,
   TILE_PROBABILITY_TOTAL,
   ResourceType,
+  COLORS_SYSTEM,
 } from "./game/game.data";
 
 import { Actions, GameService, structureBuildMap } from "./game/game.service";
@@ -134,7 +139,7 @@ export class AppComponent {
         if (
           this.action != null &&
           this.action != Actions.EndTurn &&
-          h.data.ownerColor === "white"
+          h.data.color === "white"
         ) {
           this.executeBuildAction(this.action, h);
           this.action = undefined;
@@ -151,7 +156,7 @@ export class AppComponent {
     const player = this.currentPlayer;
     hex.data.structure = structureBuildMap[action];
     hex.data.owner = player.id;
-    hex.data.ownerColor = player.color;
+    hex.data.color = player.color;
     player.buildTile(hex);
     this.actionsTaken++;
     this.refreshStats();
@@ -177,14 +182,7 @@ export class AppComponent {
 
   private resetPlayers() {
     const MAX_PLAYERS = 6;
-    this.gameService.resetPlayers([
-      // { color: "cyan", name: "AAA" },
-      // { color: "magenta", name: "BBB" },
-      // { color: "yellow", name: "CCC" },
-      { color: "red", name: "DDD" },
-      // { color: "orange", name: "EEE" },
-      // { color: "violet", name: "FFF" },
-    ]);
+    this.gameService.resetPlayers(GAME_PLAYERS);
     this.currentPlayer = this.gameService.getRandomStartPlayer();
     // this.currentPlayer = this.gameService.getCurrentPlayer();
   }
@@ -197,7 +195,7 @@ export class AppComponent {
         players.length
       );
       startTile.data.owner = player.id;
-      startTile.data.ownerColor = player.color;
+      startTile.data.color = player.color;
       startTile.data.structure = STRUCTURE_TYPES.dock;
 
       player.addTile(startTile);
@@ -205,21 +203,7 @@ export class AppComponent {
   }
 
   private findStartTileForNewPlayer(playerIdx: number, totalPlayers: number) {
-    const availableStartPositions = {
-      // 0: { row: 7, col: 1 },
-      // 60: { row: 1, col: 4 },
-      // 120: { row: 1, col: 10 },
-      // 180: { row: 7, col: 13 },
-      // 240: { row: 13, col: 10 },
-      // 300: { row: 13, col: 4 },
-      0: { row: 7, col: 0 },
-      60: { row: 0, col: 4 },
-      120: { row: 0, col: 11 },
-      180: { row: 7, col: 14 },
-      240: { row: 14, col: 11 },
-      300: { row: 14, col: 4 },
-    };
-    const startMap = Object.values(availableStartPositions);
+    const startMap = Object.values(AVAILABLE_START_POSITIONS_WATER);
     let playerStartPositionIdx = playerIdx + 1;
     if (totalPlayers === 4 && playerIdx > 1) {
       playerStartPositionIdx++;
@@ -345,14 +329,20 @@ export class AppComponent {
       return alert("No available tiles to build on for this structure");
     }
     availableTiles.forEach((h) => {
-      h.data.ownerColor = "white";
+      h.data.color = COLORS_SYSTEM.white;
     });
   }
 
   public clearHexHighlight(h: Set<TileHex> | TileHex[] | Grid<TileHex>): void {
     h.forEach((h) => {
-      if (h.data.ownerColor === "white") {
-        h.data.ownerColor = "grey";
+      // WHite color is highlight
+      if (h.data.color === COLORS_SYSTEM.white) {
+        // If tile is  env then can switch back to default grey,
+        // Otherwise need to revert to player owned color
+        h.data.color =
+          h.data.owner === -1
+            ? COLORS_SYSTEM.grey
+            : this.gameService.players[h.data.owner].color;
       }
     });
   }
