@@ -25,7 +25,7 @@ export class TileHex extends defineHex({ origin: "topLeft" }) {
   private clickEvent$ = new Subject<boolean>();
 
   public onClick(doUpgrade: boolean): void {
-    console.log(doUpgrade);
+    // console.log(doUpgrade);
     this.clickEvent$.next(doUpgrade);
   }
 

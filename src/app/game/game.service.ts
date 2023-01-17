@@ -34,7 +34,7 @@ export const structureBuildMap: Record<
 
 @Injectable()
 export class GameService implements GameState {
-  public DEV_MODE: boolean = true;
+  public DEV_MODE: boolean = false;
 
   public gameRound: number = 0;
   public players: Player[] = [];
@@ -90,7 +90,8 @@ export class GameService implements GameState {
     return currentPlayer;
   }
 
-  public getCurrentPlayerActions(): Actions[] {
-    return [Actions.BuildRoad];
-  }
+  /** TODO: */
+  // public getCurrentPlayerActions(): Actions[] {
+  //   return [Actions.ClaimTile];
+  // }
 }

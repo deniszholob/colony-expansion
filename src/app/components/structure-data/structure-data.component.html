@@ -18,12 +18,12 @@
     </div>
 
     <div *ngIf="structureProductionStats.length > 0" class="structure-section">
-      <span>Production <span class="text-muted">(In addition to tile production)</span></span>
+      <span>Bonus Production </span>
       <div class="p-l-5"><app-stats-group [stats]="structureProductionStats"></app-stats-group></div>
     </div>
 
     <p *ngIf="productionMultiplier > 0" class="structure-section">
-      {{productionMultiplier}}x Production multiplier
+      {{productionMultiplier}}x Tile production multiplier
     </p>
   </div>
 

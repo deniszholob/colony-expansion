@@ -1,4 +1,3 @@
-import { BehaviorSubject } from "rxjs";
 import { TileHex } from "../components/hex-tile/hex.model";
 import {
   ColorsPlayer,
@@ -9,6 +8,7 @@ import {
   structureData,
   StructureData,
   StructureType,
+  STRUCTURE_TYPES,
 } from "./game.data";
 
 export interface InitPlayer {
@@ -62,7 +62,11 @@ export class Player implements InitPlayer {
     // return [...this._ownedTiles];
   }
 
-  constructor(public name: string, public color: ColorsPlayer, public id: number) {}
+  constructor(
+    public name: string,
+    public color: ColorsPlayer,
+    public id: number
+  ) {}
 
   public addTile(tile: TileHex): void {
     if (tile.data.structure == undefined) {
@@ -88,35 +92,27 @@ export class Player implements InitPlayer {
   }
 
   public buildTile(tile: TileHex) {
-    if (tile.data.structure == undefined) {
+    const structure = tile.data.structure;
+    if (structure == undefined) {
       throw new Error(`Cant build tile with no structure`);
     }
+    this.subtractTileCost(structure);
 
-    this.addTile(tile);
-    this.subtractTileCost(tile.data.structure);
+    if (
+      structure === STRUCTURE_TYPES.city ||
+      structure === STRUCTURE_TYPES.capitol
+    ) {
+      this.stats.structureCount[structure]++;
+      this.updateProductionRates();
+    } else {
+      this.addTile(tile);
+    }
   }
 
   private subtractTileCost(structure: StructureType) {
     const cost = structureData[structure].buildingRequirement;
     ResourceTypes.forEach((type: ResourceType) => {
       this.stats.resourceCount[type] -= cost[type] ?? 0;
-    });
-  }
-
-  private updateProductionRates() {
-    // Reset rates
-    ResourceTypes.forEach((type: ResourceType) => {
-      this.stats.resourceRate[type] = 0;
-    });
-
-    // Recalculate Rates
-    this._ownedTiles.forEach((tile) => {
-      if (tile.data.structure) {
-        this.updateProductionRateFromTile(
-          hexTileProductionData[tile.data.type].production,
-          structureData[tile.data.structure]
-        );
-      }
     });
   }
 
@@ -131,34 +127,59 @@ export class Player implements InitPlayer {
     });
   }
 
+  private updateProductionRates() {
+    // console.group("updateProductionRates");
+    // Reset rates
+    ResourceTypes.forEach((type: ResourceType) => {
+      this.stats.resourceRate[type] = 0;
+    });
+
+    // Recalculate Rates
+    this._ownedTiles.forEach((tile) => {
+      if (!tile.data.structure) return;
+
+      this.updateProductionRateFromTile(
+        hexTileProductionData[tile.data.type].production,
+        structureData[tile.data.structure]
+      );
+    });
+    // console.groupEnd();
+  }
+
   private updateProductionRateFromTile(
     tileProduction: ProductionData,
     structure: StructureData
   ): void {
-    ResourceTypes.forEach((type: ResourceType) => {
-      this.getProductionStat(
-        type,
-        structure.productionMultiplier,
-        tileProduction[type]
-      );
+    if (!structure.productionMultiplier) return;
 
-      if (structure.bonusProduction) {
-        this.getProductionStat(
-          type,
+    // console.group("updateProductionRateFromTile", tileProduction, structure);
+    // console.log(`updateProductionRateFromTile`);
+    ResourceTypes.forEach((resource: ResourceType) => {
+      const tileYield = tileProduction[resource];
+      if (tileYield) {
+        // console.log("Tile Production", resource);
+        this.addToProductionRateStat(
+          resource,
           structure.productionMultiplier,
-          structure.bonusProduction[type]
+          tileYield
         );
       }
+
+      const tileBonusYield = structure.bonusProduction?.[resource];
+      if (tileBonusYield) {
+        // console.log("Bonus Production");
+        this.addToProductionRateStat(resource, tileBonusYield);
+      }
     });
+    // console.groupEnd();
   }
 
-  private getProductionStat(
-    type: ResourceType,
-    multiplier: number,
-    productionYield?: number
+  private addToProductionRateStat(
+    resource: ResourceType,
+    productionYield: number,
+    multiplier: number = 1
   ): void {
-    if (productionYield) {
-      this.stats.resourceRate[type] += productionYield * multiplier;
-    }
+    // console.log(`addToProductionStat`, resource, productionYield * multiplier);
+    this.stats.resourceRate[resource] += productionYield * multiplier;
   }
 }

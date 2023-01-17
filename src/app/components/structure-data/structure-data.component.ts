@@ -6,6 +6,7 @@ import {
   ResourceTypes,
   structureData,
   StructureType,
+  STRUCTURE_TYPES,
 } from "src/app/game/game.data";
 import { StatEntity } from "../stats-group/stats-group.component";
 
@@ -14,7 +15,7 @@ import { StatEntity } from "../stats-group/stats-group.component";
   templateUrl: "./structure-data.component.html",
 })
 export class StructureDataComponent {
-  private _type: StructureType = "road";
+  private _type: StructureType = STRUCTURE_TYPES.dock;
   @Input()
   public set type(type: StructureType) {
     this._type = type;
@@ -46,12 +47,6 @@ export class StructureDataComponent {
   public structureDescription: string = "";
   public structureNote: string = "";
   public productionMultiplier: number = 0;
-  public structureRequirementStats: StatEntity[] = [
-    { statType: "wood", statCount: 2 },
-    { statType: "stone", statCount: 2 },
-  ];
-  public structureProductionStats: StatEntity[] = [
-    { statType: "gold", statRate: 2 },
-    { statType: "food", statRate: 2 },
-  ];
+  public structureRequirementStats: StatEntity[] = [];
+  public structureProductionStats: StatEntity[] = [];
 }

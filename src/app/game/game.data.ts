@@ -125,15 +125,15 @@ export const structureData: StructuresData = {
     bonusProduction: { gold: 2, actions: 2 },
   },
   capitol: {
-    description: "Upgrade from city",
+    description: "Upgrade from City",
     note: "Can build only 1",
     buildingRequirement: { stone: 100, food: 100, wood: 100, gold: 100 },
     productionMultiplier: 4,
     bonusProduction: { gold: 3, actions: 4 },
   },
   monument: {
-    description: "Signifies your claim for this island",
-    note: "Victory Condition, Can build only 1",
+    description: "Victory Condition: signifies your claim for this island",
+    note: "Build in City. Can build only 1",
     buildingRequirement: {
       stone: 1000,
       wood: 500,
@@ -161,5 +161,6 @@ export const hexTileProductionData: Record<HexType, TileData> = {
   forest: { production: { wood: 5, food: 1 } },
   grass: { production: { food: 5 } },
   mountains: { production: { stone: 5, wood: 1 } },
-  water: { production: { food: 3 } },
+  water: { production: {} },
+  // water: { production: { food: 3 } },
 };

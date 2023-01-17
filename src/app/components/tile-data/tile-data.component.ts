@@ -17,23 +17,20 @@ export class TileDataComponent {
   @Input()
   public set type(type: HexType) {
     this._type = type;
-    const data = hexTileProductionData[type];
+    const tileData = hexTileProductionData[type];
     this.structureIcon = ICON_MAP[type];
 
     this.tileProductionStats = ResourceTypes.map(
       (r: ResourceType): StatEntity => ({
         statType: r,
-        statCount: data.production[r],
+        statRate: tileData.production[r],
       })
-    ).filter((s) => !!s.statCount);
+    ).filter((s) => !!s.statRate);
   }
   public get type(): HexType {
     return this._type;
   }
 
   public structureIcon: string = "";
-  public tileProductionStats: StatEntity[] = [
-    { statType: "wood", statCount: 2 },
-    { statType: "stone", statCount: 2 },
-  ];
+  public tileProductionStats: StatEntity[] = [];
 }
