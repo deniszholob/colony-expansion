@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Direction, Grid, HexCoordinates } from 'honeycomb-grid';
-import { HexGridComponent } from 'src/app/components';
-import { HexTileComponent } from 'src/app/components/hex-tile/hex-tile.component';
-import { StatsBarComponent } from 'src/app/components/stats-bar/stats-bar.component';
-import { StructureDataComponent } from 'src/app/components/structure-data/structure-data.component';
-import { TileDataComponent } from 'src/app/components/tile-data/tile-data.component';
+import {
+  HexGridComponent,
+  HexTileComponent,
+  StatsBarComponent,
+  StructureDataComponent,
+  TileDataComponent,
+} from 'src/app/components';
 import {
   Actions,
   AVAILABLE_START_POSITIONS_WATER,
