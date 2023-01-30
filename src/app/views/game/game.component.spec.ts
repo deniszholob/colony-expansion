@@ -1,22 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { GameService } from 'src/app/utils';
 
 import { GameComponent } from './game.component';
-import { GameModule } from './game.module';
 
 describe('GameComponent', () => {
   let component: GameComponent;
-  let fixture: ComponentFixture<GameComponent>;
-
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [GameModule],
-    }).compileComponents();
-  }));
+  let gameService: GameService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    gameService = new GameService();
+    component = new GameComponent(gameService);
   });
 
   it('should create', () => {

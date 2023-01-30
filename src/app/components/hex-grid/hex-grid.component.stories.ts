@@ -1,29 +1,33 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
+import { generateMap } from 'src/app/utils';
 
 import { HexGridComponent } from './hex-grid.component';
-import { HexGridModule } from './hex-grid.module';
 
 type ComponentWithCustomControls = HexGridComponent;
 
 const meta: Meta<ComponentWithCustomControls> = {
-  // title: 'Components/Hex Grid',
+  title: 'Components/Hex Grid',
   component: HexGridComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [HexGridModule],
-    }),
-  ],
+  // decorators: [moduleMetadata({imports: []})],
   parameters: {
     docs: { description: { component: `HexGrid` } },
+    layout: 'fullscreen',
   },
-  argTypes: {},
-  args: {},
+  argTypes: {
+    // Inputs
+    // input: { options: ['---', ...Object.values(YourEnum)], mapping: YourEnum & { '---': undefined }, control: { type: 'select' }}
+    // Output
+    // inputChange: { action: 'inputChange', table: { disable: true } }
+    // Hide
+    // someControl: { table: { disable: true } }
+  },
+  args: {
+    debug: true,
+    grid: generateMap(),
+  },
 };
 export default meta;
 
-const Template: Story<ComponentWithCustomControls> = (
-  args: ComponentWithCustomControls
-) => ({ props: args });
-
-export const HexGrid = Template.bind({});
-HexGrid.args = {};
+export const HexGrid: StoryObj<ComponentWithCustomControls> = {
+  render: (args: ComponentWithCustomControls) => ({ props: args }),
+};

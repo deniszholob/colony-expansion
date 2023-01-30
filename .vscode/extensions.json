@@ -1,27 +1,26 @@
+// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
-  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
-
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
-    "abusaidm.html-snippets",
-    "aessoft.aessoft-class-autocomplete",
+    "nrwl.angular-console",
     "angular.ng-template",
-    "davidbabel.vscode-simpler-icons",
-    "dbaeumer.vscode-eslint",
-    "editorconfig.editorconfig",
-    "esbenp.prettier-vscode",
-    "formulahendry.auto-close-tag",
-    "formulahendry.auto-rename-tag",
-    "ghaschel.vscode-angular-html",
-    "medzhidov.font-awesome-codes-html",
-    "michelemelluso.code-beautifier",
     "mikael.angular-beastcode",
-    "samverschueren.final-newline",
+    "deniszholob.angular-files-generator",
+    "ghaschel.vscode-angular-html",
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner",
     "streetsidesoftware.code-spell-checker",
-    "stylelint.vscode-stylelint",
+    "dbaeumer.vscode-eslint",
     "adrianwilczynski.toggle-hidden",
-    "deniszholob.angular-files-generator"
+    "pkief.material-icon-theme",
+    "medo64.render-crlf",
+    "gencer.html-slim-scss-css-class-completion",
+    "unifiedjs.vscode-mdx",
+    "yzhang.markdown-all-in-one",
+    "aaron-bond.better-comments",
+    "gruntfuggly.todo-tree",
+    "bradlc.vscode-tailwindcss",
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []

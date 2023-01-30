@@ -1,0 +1,66 @@
+.gray,
+.text-muted {
+  color: grey;
+}
+
+.red {
+  color: #ff5858;
+}
+
+.green {
+  color: #8bc34a;
+}
+
+.d-contents {
+  display: contents;
+}
+
+.d-flex,
+.flex {
+  display: flex;
+}
+
+.d-flex-inline {
+  display: inline-flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-center,
+.items-center {
+  align-items: center;
+}
+
+.flex-auto {
+  flex: 1;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.preformat-whitespace {
+  white-space: pre;
+}
+
+.p-l-5 {
+  padding-left: 5px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}

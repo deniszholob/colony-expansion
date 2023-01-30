@@ -1,21 +1,28 @@
-import { Component, Input } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import {
+  PlayerStats,
   ResourceType,
   ResourceTypes,
   StructureType,
   StructureTypes,
-} from "src/app/game/game.data";
-import { PlayerStats } from "src/app/game/player.model";
-import { StatEntity } from "../stats-group/stats-group.component";
+} from 'src/app/utils';
+
+import {
+  StatEntity,
+  StatsGroupComponent,
+} from '../stats-group/stats-group.component';
 
 @Component({
-  selector: "app-stats-bar",
-  templateUrl: "./stats-bar.component.html",
+  selector: 'app-stats-bar',
+  templateUrl: './stats-bar.component.html',
+  standalone: true,
+  imports: [CommonModule, StatsGroupComponent],
 })
 export class StatsBarComponent {
   @Input()
   public set playerStats(s: PlayerStats) {
-    this.statsForResources = ResourceTypes.filter((r) => r !== "actions").map(
+    this.statsForResources = ResourceTypes.filter((r) => r !== 'actions').map(
       (t: ResourceType): StatEntity => ({
         statType: t,
         statCount: s.resourceCount[t],

@@ -1,19 +1,26 @@
-import { Component, Input } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import {
   hexTileProductionData,
   HexType,
   ICON_MAP,
   ResourceType,
   ResourceTypes,
-} from "src/app/game/game.data";
-import { StatEntity } from "../stats-group/stats-group.component";
+} from 'src/app/utils';
+
+import {
+  StatEntity,
+  StatsGroupComponent,
+} from '../stats-group/stats-group.component';
 
 @Component({
-  selector: "app-tile-data",
-  templateUrl: "./tile-data.component.html",
+  selector: 'app-tile-data',
+  templateUrl: './tile-data.component.html',
+  standalone: true,
+  imports: [CommonModule, StatsGroupComponent],
 })
 export class TileDataComponent {
-  private _type: HexType = "grass";
+  private _type: HexType = 'grass';
   @Input()
   public set type(type: HexType) {
     this._type = type;
@@ -31,6 +38,6 @@ export class TileDataComponent {
     return this._type;
   }
 
-  public structureIcon: string = "";
+  public structureIcon: string = '';
   public tileProductionStats: StatEntity[] = [];
 }

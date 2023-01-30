@@ -1,29 +1,30 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { GameService } from 'src/app/utils';
 
 import { GameComponent } from './game.component';
-import { GameModule } from './game.module';
 
 type ComponentWithCustomControls = GameComponent;
 
 const meta: Meta<ComponentWithCustomControls> = {
-  // title: 'Components/Game',
+  title: 'Views/Game',
   component: GameComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [GameModule],
-    }),
-  ],
+  decorators: [moduleMetadata({ providers: [GameService] })],
   parameters: {
     docs: { description: { component: `Game` } },
+    // layout: 'fullscreen',
   },
-  argTypes: {},
+  argTypes: {
+    // Inputs
+    // input: { options: ['---', ...Object.values(YourEnum)], mapping: YourEnum & { '---': undefined }, control: { type: 'select' }}
+    // Output
+    // inputChange: { action: 'inputChange', table: { disable: true } }
+    // Hide
+    // someControl: { table: { disable: true } }
+  },
   args: {},
 };
 export default meta;
 
-const Template: Story<ComponentWithCustomControls> = (
-  args: ComponentWithCustomControls
-) => ({ props: args });
-
-export const Game = Template.bind({});
-Game.args = {};
+export const Game: StoryObj<ComponentWithCustomControls> = {
+  render: (args: ComponentWithCustomControls) => ({ props: args }),
+};

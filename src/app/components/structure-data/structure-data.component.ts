@@ -1,18 +1,24 @@
-import { Component, Input } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import {
   ICON_MAP,
-  ProductionData,
   ResourceType,
   ResourceTypes,
+  STRUCTURE_TYPES,
   structureData,
   StructureType,
-  STRUCTURE_TYPES,
-} from "src/app/game/game.data";
-import { StatEntity } from "../stats-group/stats-group.component";
+} from 'src/app/utils';
+
+import {
+  StatEntity,
+  StatsGroupComponent,
+} from '../stats-group/stats-group.component';
 
 @Component({
-  selector: "app-structure-data",
-  templateUrl: "./structure-data.component.html",
+  selector: 'app-structure-data',
+  templateUrl: './structure-data.component.html',
+  standalone: true,
+  imports: [CommonModule, StatsGroupComponent],
 })
 export class StructureDataComponent {
   private _type: StructureType = STRUCTURE_TYPES.dock;
@@ -43,9 +49,9 @@ export class StructureDataComponent {
     return this._type;
   }
 
-  public structureIcon: string = "";
-  public structureDescription: string = "";
-  public structureNote: string = "";
+  public structureIcon: string = '';
+  public structureDescription: string = '';
+  public structureNote: string = '';
   public productionMultiplier: number = 0;
   public structureRequirementStats: StatEntity[] = [];
   public structureProductionStats: StatEntity[] = [];

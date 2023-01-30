@@ -1,29 +1,37 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
+import { TileHex } from 'src/app/utils';
 
 import { HexTileComponent } from './hex-tile.component';
-import { HexTileModule } from './hex-tile.module';
 
 type ComponentWithCustomControls = HexTileComponent;
 
 const meta: Meta<ComponentWithCustomControls> = {
-  // title: 'Components/Hex Tile',
+  title: 'Components/Hex Tile',
   component: HexTileComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [HexTileModule],
-    }),
-  ],
+  // decorators: [moduleMetadata({imports: []})],
   parameters: {
     docs: { description: { component: `HexTile` } },
+    // layout: 'fullscreen',
   },
-  argTypes: {},
-  args: {},
+  argTypes: {
+    // Inputs
+    // input: { options: ['---', ...Object.values(YourEnum)], mapping: YourEnum & { '---': undefined }, control: { type: 'select' }}
+    // Output
+    onClick: { action: 'onClick', table: { disable: true } },
+    // Hide
+    // someControl: { table: { disable: true } }
+  },
+  args: {
+    debug: true,
+    hexTile: new TileHex(),
+    variant: false,
+  },
 };
 export default meta;
 
-const Template: Story<ComponentWithCustomControls> = (
-  args: ComponentWithCustomControls
-) => ({ props: args });
-
-export const HexTile = Template.bind({});
-HexTile.args = {};
+export const HexTile: StoryObj<ComponentWithCustomControls> = {
+  render: (args: ComponentWithCustomControls) => {
+    // initCssVars();
+    return { props: args };
+  },
+};

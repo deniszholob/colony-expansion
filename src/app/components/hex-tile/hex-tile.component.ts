@@ -1,9 +1,12 @@
-import { Component, Input } from "@angular/core";
-import { TileHex } from "./hex.model";
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { TileHex } from 'src/app/utils';
 
 @Component({
-  selector: "app-hex-tile",
-  templateUrl: "./hex-tile.component.html",
+  selector: 'app-hex-tile',
+  templateUrl: './hex-tile.component.html',
+  standalone: true,
+  imports: [CommonModule],
 })
 export class HexTileComponent {
   @Input()

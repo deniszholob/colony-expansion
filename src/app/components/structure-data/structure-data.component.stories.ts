@@ -1,29 +1,31 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
+import { StructureTypes } from 'src/app/utils';
 
 import { StructureDataComponent } from './structure-data.component';
-import { StructureDataModule } from './structure-data.module';
 
 type ComponentWithCustomControls = StructureDataComponent;
 
 const meta: Meta<ComponentWithCustomControls> = {
-  // title: 'Components/Structure Data',
+  title: 'Components/Structure Data',
   component: StructureDataComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [StructureDataModule],
-    }),
-  ],
+  // decorators: [moduleMetadata({imports: []})],
   parameters: {
     docs: { description: { component: `StructureData` } },
+    // layout: 'fullscreen',
   },
-  argTypes: {},
-  args: {},
+  argTypes: {
+    // Inputs
+    type: { options: [...StructureTypes], control: { type: 'select' } }, // Output
+    // inputChange: { action: 'inputChange', table: { disable: true } }
+    // Hide
+    // someControl: { table: { disable: true } }
+  },
+  args: {
+    type: 'capitol',
+  },
 };
 export default meta;
 
-const Template: Story<ComponentWithCustomControls> = (
-  args: ComponentWithCustomControls
-) => ({ props: args });
-
-export const StructureData = Template.bind({});
-StructureData.args = {};
+export const StructureData: StoryObj<ComponentWithCustomControls> = {
+  render: (args: ComponentWithCustomControls) => ({ props: args }),
+};

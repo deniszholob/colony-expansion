@@ -1,83 +1,84 @@
 {
-  "explorer.autoRevealExclude": {
-    "**/node_modules": true
-  },
-  "files.exclude": {
-    ".angular": false,
-    ".firebase": false,
-    ".github": false,
-    ".husky": false,
-    "build": false,
-    "docs": false,
-    "node_modules": false,
-    "public/": false,
-    "screenshots/": false,
-    ".editorconfig": false,
-    ".eslint*": false,
-    ".firebaserc": false,
-    ".gitignore": false,
-    ".npmrc": false,
-    ".prettierignore": false,
-    ".prettierrc": false,
-    "documentation.json": false,
-    "firebase.json": false,
-    "debug.log": false,
-    "package-lock.json": false,
-    "**/tsconfig*": false,
-    "**/tslint.json": false,
-    "FUNDING.yml": false,
-    "LICENSE": false,
-    "**/.browserslistrc": false,
-    "**/.gitkeep": false,
-    "**/environments": false,
-    "**/src/main.ts": false,
-    "**/polyfills.ts": false,
-    "**/typings.d.ts": false,
-    "jest.config.js": false,
-    "setup-jest.ts": false,
-    "jest.setup.ts": false,
-    "CNAME": false,
-    "coverage": false,
-    "src/*.{png,xml,ico,webmanifest,json,svg,txt}": false,
-    "src/CNAME": false
-  },
-  "editor.renderWhitespace": "all",
-  "editor.rulers": [80, 140],
+  "angular-files-generator.customTemplateFolder": ".vscode/ngfg-templates",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.codeActionsOnSave": {"source.fixAll.eslint": true},
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [80, 100],
   "explorer.sortOrderLexicographicOptions": "lower", // Case sensitive file ordering in tree
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "angular_ngrx",
   "material-icon-theme.folders.associations": {
-    "workflows": "github",
-    "cheat-sheets": "content",
-    "models": "mjml"
+    "interfaces": "apollo",
+    "options": "config",
+    "directives": "components",
+    "enums": "nuxt",
+    "models": "mjml",
+    "forms": "docs",
+    "wrappers": "hook",
+    "document": "",
+    "formly": "scala"
   },
   "material-icon-theme.files.associations": {
+    "*.interceptor.ts": "apollo",
+    "*.events.ts": "tcl",
     "*.data.ts": "database",
     "*.model.ts": "mjml",
+    "*.enum.ts": "nuxt",
+    "*.const.ts": "database",
     "model.ts": "mjml",
-    "index.ts": "url"
+    "index.ts": "url",
+    "public-api.ts": "url",
+    "models.ts": "url",
+    "services.ts": "url"
   },
-  "cSpell.words": ["deniszholob", "interactable"],
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.exclude": {
+    "**/.angular": false,
+    "**/.babelrc": false,
+    "**/.firebase": false,
+    "**/.github": false,
+    "**/.husky": false,
+    "**/.storybook": false,
+    "**/ci": false,
+    "**/coverage/": false,
+    "**/dist/": false,
+    "**/e2e": false,
+    "**/node_modules": false,
+    "**/public": false,
+    "**/screenshots/": false,
+    "**/src/environments": false,
+    "**/src/icons": false,
+    "**/src/meta": false,
+    "**/src/main.ts": false,
+    "**/src/test-setup.ts": false,
+    "**/tools/": false,
+    "**/.browserslistrc": false,
+    "**/.editorconfig": false,
+    "**/.eslint*": false,
+    "**/.firebaserc": false,
+    "**/.gitignore": false,
+    "**/.gitkeep": false,
+    "**/.gitlab-ci.yml": false,
+    "**/.npmrc": false,
+    "**/.prettier*": false,
+    "documentation.json": false,
+    "**/firebase.json": false,
+    "**/jest*": false,
+    "**/ngsw-config.json": false,
+    "**/nx.json": false,
+    "**/package-lock.json": false,
+    "**/project.json": false,
+    "**/tsconfig**": false,
+    "**/FUNDING.yml": false,
+    "**/LICENSE": false,
+    "**/NX-README.md": false,
+    "**/test-setup*": false,
+    "**/*.d.ts": false
   },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  }
+  "cSpell.words": [
+    "titlecase"
+  ]
 }

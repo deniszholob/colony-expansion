@@ -1,0 +1,54 @@
+@import 'util';
+@import 'structure';
+@import 'hex';
+@import 'form_fields';
+@import 'stats';
+
+:root {
+  --c-grass: #8bc34a;
+  --c-forest: #006600;
+  // --c-water: #0066cc;
+  // --c-water: #0865a5;
+  --c-water: #247eb6;
+
+  --c-primary: var(--c-water);
+  --c-gold: rgba(255, 215, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Quattrocento', serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  // background-color: #333;
+  background-color: #1e2424;
+  color: white;
+  // background-image: url("../assets/images/clouds.png");
+}
+
+hr {
+  outline: none;
+  border: none;
+  border-top: 1px solid var(--c-gold);
+  width: 100%;
+}
+
+a {
+  color: rgb(96 91 63);
+  text-decoration: none;
+
+  &:hover {
+    color: gold;
+  }
+}

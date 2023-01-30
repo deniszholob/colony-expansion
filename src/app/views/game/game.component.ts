@@ -1,34 +1,45 @@
-import { Component } from "@angular/core";
-import { Direction, Grid, HexCoordinates } from "honeycomb-grid";
-import { TileHex } from "src/app/components/hex-tile/hex.model";
-import {
-  AVAILABLE_START_POSITIONS_WATER,
-  GAME_PLAYERS,
-} from "src/app/game/game-configuration.data";
-import {
-  COLORS_SYSTEM,
-  HEX_TYPES,
-  ResourceType,
-  structureData,
-  StructureType,
-  STRUCTURE_TYPES,
-} from "src/app/game/game.data";
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Direction, Grid, HexCoordinates } from 'honeycomb-grid';
+import { HexGridComponent } from 'src/app/components';
+import { HexTileComponent } from 'src/app/components/hex-tile/hex-tile.component';
+import { StatsBarComponent } from 'src/app/components/stats-bar/stats-bar.component';
+import { StructureDataComponent } from 'src/app/components/structure-data/structure-data.component';
+import { TileDataComponent } from 'src/app/components/tile-data/tile-data.component';
 import {
   Actions,
+  AVAILABLE_START_POSITIONS_WATER,
+  COLORS_SYSTEM,
+  GAME_PLAYERS,
   GameService,
-  structureBuildMap,
-} from "src/app/game/game.service";
-import { Player, PlayerStats } from "src/app/game/player.model";
-import {
   generateMap,
   getInteractableTiles,
+  HEX_TYPES,
   initCssVars,
   newGrid,
-} from "./map-generator";
+  Player,
+  PlayerStats,
+  ResourceType,
+  STRUCTURE_TYPES,
+  structureBuildMap,
+  structureData,
+  StructureType,
+  TileHex,
+} from 'src/app/utils';
 
 @Component({
-  selector: "app-game",
-  templateUrl: "./game.component.html",
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    HexTileComponent,
+    HexGridComponent,
+    StatsBarComponent,
+    StructureDataComponent,
+    TileDataComponent,
+  ],
+  providers: [GameService],
 })
 export class GameComponent {
   public readonly Actions = Actions;
@@ -68,7 +79,7 @@ export class GameComponent {
   }
 
   private resetPlayers() {
-    const MAX_PLAYERS = 6;
+    // const MAX_PLAYERS = 6;
     this.gameService.resetPlayers(GAME_PLAYERS);
     this.currentPlayer = this.gameService.getRandomStartPlayer();
     // this.currentPlayer = this.gameService.getCurrentPlayer();
@@ -101,8 +112,8 @@ export class GameComponent {
       h.getClickObs().subscribe(() => {
         if (
           this.action != null &&
-          this.action != Actions.EndTurn &&
-          h.data.color === "white"
+          this.action !== Actions.EndTurn &&
+          h.data.color === 'white'
         ) {
           this.executeBuildAction(this.action, h);
           this.action = undefined;
@@ -123,9 +134,9 @@ export class GameComponent {
     player.buildTile(hex);
     this.actionsTaken++;
     this.refreshStats();
-    if (action == Actions.BuildMonument && hex.data.structure === "monument") {
+    if (action === Actions.BuildMonument && hex.data.structure === 'monument') {
       const playAgain = this.gameService.end(player);
-      playAgain ? this.onNewGame() : alert("Feel free to continue playing");
+      playAgain ? this.onNewGame() : alert('Feel free to continue playing');
     }
   }
 
@@ -182,7 +193,7 @@ export class GameComponent {
         if (this.currentPlayer.stats.structureCount.capitol > 0) {
           return [];
         }
-        return tile.data.structure === "city" ? [tile] : [];
+        return tile.data.structure === 'city' ? [tile] : [];
       }
 
       // ===== Tiles for Monument ===== //
@@ -190,12 +201,12 @@ export class GameComponent {
         if (this.currentPlayer.stats.structureCount.monument > 0) {
           return [];
         }
-        return tile.data.structure === "city" ? [tile] : [];
+        return tile.data.structure === 'city' ? [tile] : [];
       }
 
       // ===== Tiles for City ===== //
       if (this.action === Actions.BuildCity) {
-        return tile.data.structure === "outpost" ? [tile] : [];
+        return tile.data.structure === 'outpost' ? [tile] : [];
       }
 
       // ===== Tiles for Outpost or Monument ===== //
@@ -253,7 +264,7 @@ export class GameComponent {
     const availableTiles = this.getAvailableBuildTiles();
     if (availableTiles.size <= 0) {
       this.action = undefined;
-      return alert("No available tiles to build on for this structure");
+      return alert('No available tiles to build on for this structure');
     }
     availableTiles.forEach((h) => {
       h.data.color = COLORS_SYSTEM.white;
@@ -287,7 +298,7 @@ export class GameComponent {
   public canBuildStructure(structure: StructureType): string | null {
     // Action Requirements
     if (this.actionsTaken >= this.currentPlayer.maxActions) {
-      return "Not Enough Actions";
+      return 'Not Enough Actions';
     }
 
     // Structure Requirements
@@ -296,7 +307,7 @@ export class GameComponent {
       (this.currentPlayer.stats.structureCount.capitol >= 1 ||
         this.currentPlayer.stats.structureCount.city <= 0)
     ) {
-      return "Structure requirement not met";
+      return 'Structure requirement not met';
     }
 
     if (
@@ -304,14 +315,14 @@ export class GameComponent {
       (this.currentPlayer.stats.structureCount.monument >= 1 ||
         this.currentPlayer.stats.structureCount.city <= 0)
     ) {
-      return "Structure requirement not met";
+      return 'Structure requirement not met';
     }
 
     if (
       structure === STRUCTURE_TYPES.city &&
       this.currentPlayer.stats.structureCount.outpost <= 0
     ) {
-      return "Structure requirement not met";
+      return 'Structure requirement not met';
     }
 
     // Resource Requirements
@@ -323,6 +334,6 @@ export class GameComponent {
           ] >= requirementCount
       )
       .reduce((acc, curr) => acc && curr);
-    return reqMet ? null : "Not enough Resources";
+    return reqMet ? null : 'Not enough Resources';
   }
 }

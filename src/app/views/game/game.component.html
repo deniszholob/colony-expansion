@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex flex-center justify-around">
       <button (click)="onNewGame()">New Game</button>
-      <app-stats-bar [playerStats]="playerStats" class="p-l-5"></app-stats-bar>
+      <app-stats-bar class="p-l-5" [playerStats]="playerStats"></app-stats-bar>
     </div>
     <br />
 
@@ -19,7 +19,9 @@
       <div class="styled-box">
         <p>
           <span>Current Player: </span>
-          <span *ngIf="currentPlayer" [style.color]="currentPlayer.color">{{ currentPlayer.name }} </span>
+          <span *ngIf="currentPlayer" [style.color]="currentPlayer.color"
+            >{{ currentPlayer.name }}
+          </span>
         </p>
         <span>Year: {{ gameService.gameRound }}</span>
         <p class="stats-entity">
@@ -33,36 +35,55 @@
 
   <div class="actions">
     <div class="w-full d-flex">
-      <button (click)="onAction(Actions.EndTurn)" class="w-full">
-        <div class="progress" [style.width]="100 - (actionsTaken / currentPlayer.maxActions) * 100 + '%'"></div>
+      <button class="w-full" (click)="onAction(Actions.EndTurn)">
+        <div
+          class="progress"
+          [style.width]="100 - (actionsTaken / currentPlayer.maxActions) * 100 + '%'"
+        ></div>
         <span>{{ actionsTaken }}/{{ currentPlayer.maxActions }}</span>
         <img src="assets/images/hourglass.png" alt="" />
         End Turn
       </button>
-      <button (click)="onCancelAction()" class="w-full" [disabled]="!action">
+      <button class="w-full" [disabled]="!action" (click)="onCancelAction()">
         <img src="assets/images/cross.png" alt="" />
         Cancel
       </button>
     </div>
 
-    <button (click)="onAction(Actions.BuildRoad)" [disabled]="canBuildStructure('road')" [title]="canBuildStructure('road') ?? ''">
-      <app-structure-data [type]="'road'" class="d-contents"></app-structure-data>
-    </button>
-    <button (click)="onAction(Actions.BuildOutpost)" [disabled]="canBuildStructure('outpost')" [title]="canBuildStructure('outpost') ?? ''">
-      <app-structure-data [type]="'outpost'" class="d-contents"></app-structure-data>
-    </button>
-    <button (click)="onAction(Actions.BuildCity)" [disabled]="canBuildStructure('city')" [title]="canBuildStructure('city') ?? ''">
-      <app-structure-data [type]="'city'" class="d-contents"></app-structure-data>
-    </button>
-    <button (click)="onAction(Actions.BuildCapitol)" [disabled]="canBuildStructure('capitol')" [title]="canBuildStructure('capitol') ?? ''">
-      <app-structure-data [type]="'capitol'" class="d-contents"></app-structure-data>
+    <button
+      [disabled]="canBuildStructure('road')"
+      [title]="canBuildStructure('road') ?? ''"
+      (click)="onAction(Actions.BuildRoad)"
+    >
+      <app-structure-data class="d-contents" [type]="'road'"></app-structure-data>
     </button>
     <button
-      (click)="onAction(Actions.BuildMonument)"
+      [disabled]="canBuildStructure('outpost')"
+      [title]="canBuildStructure('outpost') ?? ''"
+      (click)="onAction(Actions.BuildOutpost)"
+    >
+      <app-structure-data class="d-contents" [type]="'outpost'"></app-structure-data>
+    </button>
+    <button
+      [disabled]="canBuildStructure('city')"
+      [title]="canBuildStructure('city') ?? ''"
+      (click)="onAction(Actions.BuildCity)"
+    >
+      <app-structure-data class="d-contents" [type]="'city'"></app-structure-data>
+    </button>
+    <button
+      [disabled]="canBuildStructure('capitol')"
+      [title]="canBuildStructure('capitol') ?? ''"
+      (click)="onAction(Actions.BuildCapitol)"
+    >
+      <app-structure-data class="d-contents" [type]="'capitol'"></app-structure-data>
+    </button>
+    <button
       [disabled]="canBuildStructure('monument')"
       [title]="canBuildStructure('monument') ?? ''"
+      (click)="onAction(Actions.BuildMonument)"
     >
-      <app-structure-data [type]="'monument'" class="d-contents"></app-structure-data>
+      <app-structure-data class="d-contents" [type]="'monument'"></app-structure-data>
     </button>
     <br />
   </div>

@@ -7,7 +7,9 @@
   <!-- <button class="tile-upgrade green" title="Upgrade" *ngIf="canUpgrade" (click)="onClick(true)">+</button> -->
 
   <div class="tile-content" *ngIf="debug">{{ hexTile?.row }}, {{ hexTile?.col }}</div>
-  <div class="tile-content tile-yield" *ngIf="hexTile?.data?.yield">+{{ hexTile?.data?.yield }}</div>
+  <div class="tile-content tile-yield" *ngIf="hexTile?.data?.yield">
+    +{{ hexTile?.data?.yield }}
+  </div>
   <div
     class="tile-image tile-structure"
     *ngIf="hexTile?.data?.structure"

@@ -1,11 +1,16 @@
-import { Component, Input } from "@angular/core";
-import { ResourceType, StructureType, ICON_MAP } from "src/app/game/game.data";
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ICON_MAP, ResourceType, StructureType } from 'src/app/utils';
+
+import { StatEntity } from '../stats-group/stats-group.component';
 
 @Component({
-  selector: "app-stats-entity",
-  templateUrl: "./stats-entity.component.html",
+  selector: 'app-stats-entity',
+  templateUrl: './stats-entity.component.html',
+  standalone: true,
+  imports: [CommonModule],
 })
-export class StatsEntityComponent {
+export class StatsEntityComponent implements StatEntity {
   @Input()
   public statCount?: number = 0;
   @Input()
@@ -16,6 +21,6 @@ export class StatsEntityComponent {
     this.type = statType;
   }
 
-  public type: string = "";
-  public statIcon: string = "";
+  public type: string = '';
+  public statIcon: string = '';
 }
