@@ -55,9 +55,11 @@ export class GameService implements GameState {
 
   public giveStartingResources() {
     this.players.forEach((player) => {
-      player.stats.resourceCount = this.DEV_MODE
+      player.stats.resourceCount = {
+        ...(this.DEV_MODE
         ? PLAYER_STARTING_RESOURCES_DEV
-        : PLAYER_STARTING_RESOURCES_NORMAL;
+          : PLAYER_STARTING_RESOURCES_NORMAL),
+      };
     });
   }
 

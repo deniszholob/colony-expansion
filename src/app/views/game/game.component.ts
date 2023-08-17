@@ -64,6 +64,7 @@ export class GameComponent {
     this.currentPlayer = this.gameService.getCurrentPlayer();
     this.playerStats = this.currentPlayer.stats;
   }
+
   public onNewGame() {
     this.gameService.gameRound = 0;
     this.generateMap();
@@ -80,7 +81,7 @@ export class GameComponent {
 
   private resetPlayers() {
     // const MAX_PLAYERS = 6;
-    this.gameService.resetPlayers(GAME_PLAYERS);
+    this.gameService.resetPlayers([...GAME_PLAYERS]);
     this.currentPlayer = this.gameService.getRandomStartPlayer();
     // this.currentPlayer = this.gameService.getCurrentPlayer();
   }

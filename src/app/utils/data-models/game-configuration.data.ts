@@ -8,7 +8,7 @@ export const PLAYER_STARTING_RESOURCES_NORMAL: StatResources = {
   stone: 15,
   wood: 5,
   actions: 5,
-};
+} as const;
 
 export const PLAYER_STARTING_RESOURCES_DEV: StatResources = {
   food: 999,
@@ -16,7 +16,7 @@ export const PLAYER_STARTING_RESOURCES_DEV: StatResources = {
   stone: 999,
   wood: 999,
   actions: 999,
-};
+} as const;
 
 export const MAX_PLAYERS = 6;
 export const GAME_PLAYERS: InitPlayer[] = [
@@ -35,7 +35,7 @@ export const AVAILABLE_START_POSITIONS_WATER: Record<number, HexCoordinates> = {
   180: { row: 7, col: 14 },
   240: { row: 14, col: 11 },
   300: { row: 14, col: 4 },
-};
+} as const;
 
 export const AVAILABLE_START_POSITIONS_LAND: Record<number, HexCoordinates> = {
   0: { row: 7, col: 1 },
@@ -44,4 +44,4 @@ export const AVAILABLE_START_POSITIONS_LAND: Record<number, HexCoordinates> = {
   180: { row: 7, col: 13 },
   240: { row: 13, col: 10 },
   300: { row: 13, col: 4 },
-};
+} as const;
