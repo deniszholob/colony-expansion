@@ -1,24 +1,8 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { StatEntity, StatsGroupComponent } from './stats-group.component';
-
-const MOCK_StatEntity: StatEntity[] = [
-  {
-    statType: 'food',
-    statCount: 0,
-    statRate: 0,
-  },
-  {
-    statType: 'wood',
-    statCount: 10,
-    statRate: 10,
-  },
-  {
-    statType: 'stone',
-    statCount: -10,
-    statRate: -10,
-  },
-];
+import { ResourceTypes } from 'src/app/utils';
+import { StatsGroupComponent } from './stats-group.component';
+import { MOCK_StatEntity } from '../stats-entity/stats-entity.mock';
 
 type ComponentWithCustomControls = StatsGroupComponent;
 
@@ -32,13 +16,17 @@ const meta: Meta<ComponentWithCustomControls> = {
   },
   argTypes: {
     // Inputs
-    // input: { options: ['---', ...Object.values(YourEnum)], mapping: YourEnum & { '---': undefined }, control: { type: 'select' }}
+    marketMoneyTradeResource: {
+      options: ResourceTypes,
+      control: { type: 'select' },
+    },
     // Output
-    // inputChange: { action: 'inputChange', table: { disable: true } }
+    tradeChange: { action: 'tradeChange', table: { disable: true } },
     // Hide
     // someControl: { table: { disable: true } }
   },
   args: {
+    marketMoneyTradeResource: 'gold',
     stats: MOCK_StatEntity,
   },
 };

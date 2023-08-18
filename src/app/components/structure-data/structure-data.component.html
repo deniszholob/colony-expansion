@@ -2,7 +2,8 @@
   <div>
     <h3 class="stats-entity title">
       <img src="assets/images/{{ structureIcon }}.png" alt="{{ type }}" />
-      Build {{ type | titlecase }}
+      <span *ngIf="type !== 'dock'">Build</span>
+      <span>{{ type | titlecase }}</span>
     </h3>
 
     <p class="description p-l-5 text-muted structure-section">
@@ -20,13 +21,13 @@
     </div>
 
     <div class="structure-section" *ngIf="structureProductionStats.length > 0">
-      <span>Bonus Production </span>
+      <span>Effects</span>
       <div class="p-l-5">
         <app-stats-group [stats]="structureProductionStats"></app-stats-group>
       </div>
     </div>
 
-    <p class="structure-section" *ngIf="productionMultiplier > 0">
+    <p class="structure-section" *ngIf="productionMultiplier > 1">
       {{ productionMultiplier }}x Tile production multiplier
     </p>
   </div>

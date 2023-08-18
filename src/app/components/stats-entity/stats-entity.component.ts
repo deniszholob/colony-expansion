@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ICON_MAP, ResourceType, StructureType } from 'src/app/utils';
 
-import { StatEntity } from '../stats-group/stats-group.component';
+import { StatEntity } from './stats-entity.model';
 
 @Component({
   selector: 'app-stats-entity',

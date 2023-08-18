@@ -1,5 +1,9 @@
 <div class="stats-bar">
-  <app-stats-group [stats]="statsForResources"></app-stats-group>
+  <app-stats-group
+    [stats]="statsForResources"
+    [marketMoneyTradeResource]="marketTradeEnabled ? MARKET_MONEY_RESOURCE : undefined"
+    (tradeChange)="onTrade($event)"
+  ></app-stats-group>
   <app-stats-group [stats]="statsForStructures"></app-stats-group>
 </div>
 

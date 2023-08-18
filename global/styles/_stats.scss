@@ -32,8 +32,15 @@
 .stats-bar {
   display: flex;
 
+  .dropdown-content {
+    left: -100%;
+  }
+
   .stats-group {
-    padding: 5px 15px;
+    padding: 0 15px;
+    .stats-entity {
+      padding: 5px 0;
+    }
     background: hsl(13deg 5% 15%);
     &:first-child {
       //   border-right: 1px solid rgba(black, 0.2);

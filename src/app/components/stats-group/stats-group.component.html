@@ -1,8 +1,18 @@
 <div class="stats-group">
-  <app-stats-entity
-    *ngFor="let stat of stats"
-    [statCount]="stat.statCount"
-    [statRate]="stat.statRate"
-    [statType]="stat.statType"
-  ></app-stats-entity>
+  <app-dropdown *ngFor="let stat of stats">
+    <app-stats-entity
+      [statCount]="stat.statCount"
+      [statRate]="stat.statRate"
+      [statType]="stat.statType"
+    ></app-stats-entity>
+
+    <ng-container dropdownContent>
+      <app-trade
+        *ngIf="marketMoneyTradeResource"
+        [resourceType]="stat.statType"
+        [moneyResource]="marketMoneyTradeResource"
+        (tradeChange)="tradeChange.emit($event)"
+      ></app-trade>
+    </ng-container>
+  </app-dropdown>
 </div>

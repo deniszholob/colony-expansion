@@ -2,7 +2,11 @@
   <div>
     <div class="d-flex flex-center justify-around">
       <button (click)="onNewGame()">New Game</button>
-      <app-stats-bar class="p-l-5" [playerStats]="playerStats"></app-stats-bar>
+      <app-stats-bar
+        class="p-l-5"
+        [playerStats]="playerStats"
+        [marketTradeEnabled]="gameService.marketTradeEnabled"
+      ></app-stats-bar>
     </div>
     <br />
 

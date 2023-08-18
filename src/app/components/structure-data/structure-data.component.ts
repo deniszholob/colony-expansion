@@ -9,10 +9,8 @@ import {
   StructureType,
 } from 'src/app/utils';
 
-import {
-  StatEntity,
-  StatsGroupComponent,
-} from '../stats-group/stats-group.component';
+import { StatEntity } from '../stats-entity/stats-entity.model';
+import { StatsGroupComponent } from '../stats-group/stats-group.component';
 
 @Component({
   selector: 'app-structure-data',

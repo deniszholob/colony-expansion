@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Direction, Grid, HexCoordinates } from 'honeycomb-grid';
+import { Subject, takeUntil } from 'rxjs';
 import {
   HexGridComponent,
   HexTileComponent,
@@ -43,8 +44,10 @@ import {
   ],
   providers: [GameService],
 })
-export class GameComponent {
+export class GameComponent implements OnDestroy {
   public readonly Actions = Actions;
+  public readonly clearSub$ = new Subject<void>();
+
   public hexGrid: Grid<TileHex> = newGrid();
   public interactableTiles: Grid<TileHex> = getInteractableTiles(this.hexGrid);
   public debug: boolean = false;
@@ -61,6 +64,9 @@ export class GameComponent {
   constructor(public gameService: GameService) {
     initCssVars();
     this.gameService.init();
+    this.gameService.refreshUi
+      .pipe(takeUntil(this.clearSub$))
+      .subscribe(() => this.refreshStats());
     this.onNewGame();
 
     this.currentPlayer = this.gameService.getCurrentPlayer();
@@ -69,10 +75,16 @@ export class GameComponent {
 
   public onNewGame() {
     this.gameService.gameRound = 0;
+    this.actionsTaken = 0;
     this.generateMap();
     this.resetPlayers();
     this.assignPlayerStartPositions();
     this.refreshStats();
+  }
+
+  public ngOnDestroy(): void {
+    this.clearSub$.next();
+    this.clearSub$.complete();
   }
 
   private generateMap(): void {

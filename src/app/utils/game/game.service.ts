@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { STRUCTURE_TYPES, StructureType } from '../data-models/game.data';
 import {
@@ -41,6 +42,9 @@ export class GameService implements GameState {
   public players: Player[] = [];
   public currentPlayerTurn: number = 0;
 
+  public refreshUi: Subject<void> = new Subject();
+  public marketTradeEnabled: boolean = true;
+
   // constructor() {}
 
   public init(): void {
@@ -53,11 +57,11 @@ export class GameService implements GameState {
     );
   }
 
-  public giveStartingResources() {
+  public giveStartingResources(): void {
     this.players.forEach((player) => {
       player.stats.resourceCount = {
         ...(this.DEV_MODE
-        ? PLAYER_STARTING_RESOURCES_DEV
+          ? PLAYER_STARTING_RESOURCES_DEV
           : PLAYER_STARTING_RESOURCES_NORMAL),
       };
     });
@@ -71,6 +75,7 @@ export class GameService implements GameState {
   }
 
   public getCurrentPlayer(): Player {
+    if (this.players.length < 1) throw new Error('No players available');
     return this.players[this.currentPlayerTurn];
   }
 
@@ -89,7 +94,7 @@ export class GameService implements GameState {
       this.currentPlayerTurn = 0;
       this.gameRound++;
     }
-    const currentPlayer = this.getCurrentPlayer();
+    const currentPlayer: Player = this.getCurrentPlayer();
     if (this.gameRound > 0) {
       currentPlayer.updateProduction();
     }
