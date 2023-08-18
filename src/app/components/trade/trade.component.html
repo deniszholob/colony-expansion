@@ -1,0 +1,28 @@
+<ng-container *ngIf="resourceType !== moneyResource">
+  <!-- Buy RESOURCE for GOLD a.k.a SELL GOLD for RESOURCE -->
+  <ng-container
+    [ngTemplateOutlet]="TradeActionTemplate"
+    [ngTemplateOutletContext]="{ $implicit: 'Buy' }"
+  ></ng-container>
+
+  <!-- Buy GOLD for RESOURCE a.k.a SELL RESOURCE for GOLD -->
+  <ng-container
+    [ngTemplateOutlet]="TradeActionTemplate"
+    [ngTemplateOutletContext]="{ $implicit: 'Sell' }"
+  ></ng-container>
+</ng-container>
+
+<ng-template #TradeActionTemplate let-action="$implicit">
+  <button class="market-action" (click)="onTradeAction(action)">
+    {{ action }}
+    <app-stats-entity
+      [statType]="resourceType"
+      [statCount]="action === 'Buy' ? marketRate.costToBuy : marketRate.costToSell"
+    ></app-stats-entity>
+    for
+    <app-stats-entity
+      [statType]="moneyResource"
+      [statCount]="action === 'Buy' ? marketRate.costToSell : marketRate.costToBuy"
+    ></app-stats-entity>
+  </button>
+</ng-template>

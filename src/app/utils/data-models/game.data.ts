@@ -1,9 +1,9 @@
 export const RESOURCE_TYPES = {
+  actions: 'actions',
+  gold: 'gold',
   food: 'food',
   wood: 'wood',
   stone: 'stone',
-  gold: 'gold',
-  actions: 'actions',
 } as const;
 export type ResourceType = keyof typeof RESOURCE_TYPES;
 export const ResourceTypes: ResourceType[] = Object.keys(RESOURCE_TYPES).filter(
@@ -26,8 +26,8 @@ export const STRUCTURE_TYPES = {
   outpost: 'outpost',
   city: 'city',
   capitol: 'capitol',
-  dock: 'dock',
   monument: 'monument',
+  dock: 'dock',
 } as const;
 export type StructureType = keyof typeof STRUCTURE_TYPES;
 export const StructureTypes: StructureType[] = Object.keys(
@@ -162,4 +162,22 @@ export const hexTileProductionData: Record<HexType, TileData> = {
   mountains: { production: { stone: 5, wood: 1 } },
   water: { production: {} },
   // water: { production: { food: 3 } },
+} as const;
+
+export type MarketRates = {
+  costToSell: number;
+  costToBuy: number;
 };
+
+/** Sell/Buy Ratio
+ * * e.g.:
+ * * to sell 4 item it costs 1 gold => sell 4 items to buy 1 gold
+ * * to buy 1 items it costs 4 gold => buy 1 item by selling 4 gold
+ * * sell cost is 4 buy cost is 1
+ */
+export const MARKET_RATES: MarketRates = {
+  costToSell: 4,
+  costToBuy: 1,
+} as const;
+
+export const MARKET_MONEY_RESOURCE: ResourceType = 'gold';

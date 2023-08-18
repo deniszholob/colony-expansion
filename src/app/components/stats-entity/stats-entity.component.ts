@@ -12,9 +12,9 @@ import { StatEntity } from '../stats-group/stats-group.component';
 })
 export class StatsEntityComponent implements StatEntity {
   @Input()
-  public statCount?: number = 0;
+  public statCount?: number;
   @Input()
-  public statRate?: number = 0;
+  public statRate?: number;
   @Input()
   public set statType(statType: ResourceType | StructureType) {
     this.statIcon = ICON_MAP[statType];
