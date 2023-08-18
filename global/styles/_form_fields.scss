@@ -1,3 +1,10 @@
+.box {
+  padding: 10px 15px;
+  color: white;
+  background: hsl(28deg 16% 12%);
+  border: 1px solid rgb(96 91 63);
+}
+
 button,
 .button {
   display: inline-flex;
@@ -12,6 +19,7 @@ button,
   cursor: pointer;
   border: 1px solid rgb(96 91 63);
   background: rgb(0 0 0 / 20%);
+  background: hsl(28deg 16% 12%);
   background: linear-gradient(0deg, hsl(28deg 16% 12%), rgb(68 64 61));
 
   &:hover {
